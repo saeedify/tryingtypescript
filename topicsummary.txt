@@ -1,0 +1,158 @@
+Type Safety
+
+Often during development, we get a situation where a variable gets a type of value it is not supposed to have.
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+Prop Types
+
+We use a react feature called prop types to have type safety when passing props.
+    
+    npm install prop-types
+    import PropTypes from 'prop-types';
+
+AFTER the component block, we add the following block of code to define the prop types-
+    
+    ComponentName.propTypes = {
+        name: PropTypes.string,
+        age: PropTypes.number,
+        isMarried: PropTypes.bool,
+        friends: PropTypes.arrayOf(PropTypes.string),
+    }
+
+If any wrong data type is passed, it does not break the app, but it gives a warning in the console.
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+TypeScript
+
+
+
+Another way of ensuring type safety is using typescript.
+
+
+
+
+**creating a react app with its base as typescript**
+
+    npx create-react-app projectName --template typescript
+
+
+
+
+
+**Defining types using typescript**
+
+eg.
+
+    const myName:string = "Saeed";
+
+Default (implicit) type of any variable, function argument, or whatever, is 'any' which means anything goes, number, string, etc.
+
+In cases like above, specifying types is not necessary, but in case of any prop or argument in a function, it is necessary to specify its type. 
+
+
+
+eg2.
+
+    const ComponentName = (props: string) => {
+        .
+        .
+        .
+    }
+
+Here, all props passes can have string value.
+
+
+
+
+
+specifying the type of value a function or a component returns-
+
+    const functionName = (argumentName: string) : number => {
+        .
+        .
+        return x;   //x has to be a number, else error
+    }
+
+
+
+
+defining datatypes of states-
+
+    const [state, setState] = useState<number>(55);
+
+the initial value which is placed inside the bracket must match with the specified type, else error.
+
+
+
+
+
+
+
+
+**Interface**
+
+For creating a custom structure for props, like each prop has a different type, we can make a thing called interface.
+We can then specify the type of props as the name of the interface.
+
+eg.
+    const ComponentName = (props: interfaceName) => {
+        .
+        .
+        .
+    }
+
+syntax of making an interface-
+    
+    interface interfaceName{
+        name: string;
+        gender: Gender;           //here Gender is an enum
+        age: number;              //notice here we have semicolons, as interface is an object, thus the format
+        isMarried: boolean;       //notice here it is 'boolean' not 'bool'
+        friends: string[];
+    }
+
+
+
+
+
+
+
+
+**enums**
+
+a datatype with only given options as possible values.
+
+
+syntax-
+
+    export enum Gender {
+        Male = "Male",
+        Female = "Female",
+        Other = "Other",
+    }
+
+
+Now, we can specify any data's type as Gender.
+eg. in interface, we can use-
+
+    interface interfaceName {
+        .
+        gender:Gender;
+        .
+    }
+
+to pass in props-
+
+    gender={ Gender.Female }
+
+
+
+----------------------------------------------------------------------------------------------------------------------
